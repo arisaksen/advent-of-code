@@ -15,28 +15,20 @@ This way we don't need to loop over the whole lists of numbers each time.
 */
 
 func part1Optimized(puzzle string) int {
-	// mixed feelings about moving every var to the start
-	var (
-		inputLines       []string
-		leftNumbers      []int
-		rightNumbers     []int
-		distanceSumTotal int
-	)
-	for _, line := range strings.Split(strings.TrimSuffix(puzzle, "\n"), "\n") {
-		inputLines = append(inputLines, line)
-	}
+	var leftNumbers, rightNumbers []int
 
-	for _, line := range inputLines {
-		numberStrings := strings.Split(line, "   ")
+	for _, line := range strings.Split(strings.TrimSpace(puzzle), "\n") {
+		numberStrings := strings.Fields(line)
 		leftNumber, err := strconv.Atoi(numberStrings[0])
 		if err != nil {
 			log.Fatal(err)
 		}
-		leftNumbers = append(leftNumbers, leftNumber)
 		rightNumber, err := strconv.Atoi(numberStrings[1])
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		leftNumbers = append(leftNumbers, leftNumber)
 		rightNumbers = append(rightNumbers, rightNumber)
 	}
 	sort.Ints(leftNumbers)
@@ -48,21 +40,9 @@ func part1Optimized(puzzle string) int {
 	//	return rightNumbers[i] < rightNumbers[j]
 	//})
 
+	var distanceSumTotal int
 	for i := 0; i < len(leftNumbers); i++ {
-		smallestLeft := leftNumbers[i]
-		smallestRight := rightNumbers[i]
-
-		distanceSum := smallestRight - smallestLeft
-
-		//if distanceSum < 0 {
-		//	distanceSumTotal += -1 * distanceSum
-		//} else {
-		//	distanceSumTotal += distanceSum
-		//}
-		distanceSumTotal += int(math.Abs(float64(distanceSum)))
-		//log.Println("smallestLeft:", smallestLeft, "smallestRight:", smallestRight, "-", "distance:", distanceSum, "sizeLeft:", len(leftNumbers), "sum:", distanceSumTotal)
-
+		distanceSumTotal += int(math.Abs(float64(rightNumbers[i] - leftNumbers[i])))
 	}
-
 	return distanceSumTotal
 }
