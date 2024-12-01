@@ -1,6 +1,5 @@
 # advent-of-code
 
-# Kotlin
+# c_sharp solution with projects for each day
 
-cd kotlin/2024
-open new window from there
+# go common module. Dir for each day
