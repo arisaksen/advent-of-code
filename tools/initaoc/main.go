@@ -17,8 +17,9 @@ const (
 )
 
 func main() {
+
 	date := time.Now()
-	//date, err := time.Parse(time.DateOnly, "2024-12-07")
+	//date, err := time.Parse(time.DateOnly, "2024-12-01")
 	//if err != nil {
 	//	log.Fatal(err)
 	//}
@@ -112,6 +113,13 @@ func TestPart1(t *testing.T) {
 	actual := part1(puzzle1Test)
 
 	assert.Equal(t, 1, actual)
+}
+
+func BenchmarkTest(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = part1(puzzle1Test)
+	}
+	b.ReportAllocs()
 }
 	`), os.ModePerm); err != nil {
 		fmt.Printf("unable to write file: %v", err)
