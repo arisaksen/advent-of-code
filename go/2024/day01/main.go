@@ -16,7 +16,7 @@ var puzzle1 string
 //go:embed puzzle2.txt
 var puzzle2 string
 
-func findAndRemoveSmallestNumber(numbers *[]int) int {
+func pickSmallest(numbers *[]int) int {
 	if len(*numbers) < 1 {
 		log.Fatal("expect numbers to be greater than 0")
 	}
@@ -66,8 +66,8 @@ func part1(puzzle string) int {
 
 	var distanceSumTotal int
 	for {
-		smallestLeft := findAndRemoveSmallestNumber(&leftNumbers)
-		smallestRight := findAndRemoveSmallestNumber(&rightNumbers)
+		smallestLeft := pickSmallest(&leftNumbers)
+		smallestRight := pickSmallest(&rightNumbers)
 
 		distanceSum := smallestRight - smallestLeft
 
@@ -104,7 +104,7 @@ func part2(puzzle string) int {
 		rightNumbers = append(rightNumbers, rightNumber)
 	}
 
-	var simularityScore int
+	var similarityScore int
 	for _, numberFirst := range leftNumbers {
 		var appearanceCount int
 		for _, numberSecond := range rightNumbers {
@@ -113,11 +113,11 @@ func part2(puzzle string) int {
 			}
 		}
 
-		simularityScore += numberFirst * appearanceCount
-		//log.Println("numberFirst:", numberFirst, "appearenceCount:", appearanceCount, "-", "simScore:", simularityScore)
+		similarityScore += numberFirst * appearanceCount
+		//log.Println("numberFirst:", numberFirst, "appearanceCount:", appearanceCount, "-", "simScore:", similarityScore)
 	}
 
-	return simularityScore
+	return similarityScore
 }
 
 func main() {

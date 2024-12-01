@@ -19,7 +19,7 @@ func TestRemoveIndex(t *testing.T) {
 
 func TestFindAndRemoveSmallest(t *testing.T) {
 	input := []int{1, 2, 3, 4, 5}
-	smallest := findAndRemoveSmallestNumber(&input)
+	smallest := pickSmallest(&input)
 
 	assert.Equal(t, 4, len(input))
 	assert.Equal(t, 1, smallest)
