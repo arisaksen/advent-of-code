@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Run": {
+      "commandName": "Project",
+      "commandLineArgs": "../../../puzzle1.txt"
+    },
+    "RunTest": {
+      "commandName": "Project",
+      "commandLineArgs": "../../../puzzle1_test.txt"
+    }
+  }
+}
