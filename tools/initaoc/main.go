@@ -84,12 +84,12 @@ func part2(puzzle string) int {
 func main() {
 	start1 := time.Now()
 	fmt.Println()
-	fmt.Println("Part 1: ", part1(puzzle1))
+	fmt.Println("Part 1:", part1(puzzle1))
 	fmt.Println(time.Since(start1))
 
 	start2 := time.Now()
 	fmt.Println()
-	fmt.Println("Part 2: ", part2(puzzle2))
+	fmt.Println("Part 2:", part2(puzzle2))
 	fmt.Println(time.Since(start2))
 }
 	`), os.ModePerm); err != nil {
