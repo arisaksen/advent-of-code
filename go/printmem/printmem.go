@@ -1,11 +1,11 @@
-package _go
+package printmem
 
 import (
 	"fmt"
 	"runtime"
 )
 
-func PrintMemStats(title string) {
+func Print(title string) {
 	fmt.Println(title)
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
