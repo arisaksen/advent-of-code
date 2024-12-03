@@ -21,56 +21,69 @@ func removeIndex(slice *[]int, index int) {
 	*slice = (*slice)[:len(*slice)-1]
 }
 
+/* initialProblemDampener and goto Loop was used for part2 but did not work.
+ */
 func checkIfSafe(report []int, initialProblemDampener int) bool {
+	//fmt.Println("PRE", len(report))
+	//fmt.Println(report)
 	problemDampener := initialProblemDampener
 
+Loop:
 	sateIncrease := report[0] < report[1]
 	for i, _ := range report {
 		if i+1 < len(report) {
 			if !checkAdjacent(report[i], report[i+1], 3) {
 				problemDampener--
-				removeIndex(&report, i+1)
 				if problemDampener < 0 {
 					return false
 				}
-				continue
+				removeIndex(&report, i+1)
+				//continue
+				goto Loop
 			}
 			if (report[i] < report[i+1]) != sateIncrease {
-				removeIndex(&report, i+1)
 				problemDampener--
 				if problemDampener < 0 {
 					return false
 				}
-				continue
+				removeIndex(&report, i+1)
+				//continue
+				goto Loop
 			}
 			if report[i] == report[i+1] {
+				problemDampener--
+				if problemDampener < 0 {
+					return false
+				}
 				removeIndex(&report, i+1)
-				problemDampener--
-				if problemDampener < 0 {
-					return false
-				}
-				continue
+				//continue
+				goto Loop
 			}
 		}
-		if i+2 < len(report) {
-			if !checkAdjacent(report[i+1], report[i+2], 3) {
-				removeIndex(&report, i+2)
-				problemDampener--
-				if problemDampener < 0 {
-					return false
-				}
-				continue
-			}
-			if (report[i] < report[i+2]) != sateIncrease {
-				removeIndex(&report, i+2)
-				problemDampener--
-				if problemDampener < 0 {
-					return false
-				}
-				continue
-			}
-		}
+		//if i+2 < len(report) {
+		//	if !checkAdjacent(report[i+1], report[i+2], 3) {
+		//		removeIndex(&report, i+2)
+		//		problemDampener--
+		//		if problemDampener < 0 {
+		//			return false
+		//		}
+		//		//continue
+		//		goto Loop
+		//	}
+		//	if (report[i] < report[i+2]) != sateIncrease {
+		//		removeIndex(&report, i+2)
+		//		problemDampener--
+		//		if problemDampener < 0 {
+		//			return false
+		//		}
+		//		//continue
+		//		goto Loop
+		//	}
+		//}
 	}
+
+	//fmt.Println("POST", len(report))
+	//fmt.Println(report)
 	return true
 }
 
@@ -130,11 +143,9 @@ func part2(puzzle string) int {
 	}
 
 	var safeReportCounter int
-	for i, report := range reports {
-		if checkIfSafe(report, 1) {
+	for _, report := range reports {
+		if isSafe(report) || isSafeWithOneRemoval(report) {
 			safeReportCounter++
-		} else {
-			fmt.Println("unsafe report index", i, report)
 		}
 	}
 

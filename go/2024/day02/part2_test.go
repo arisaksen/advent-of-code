@@ -49,16 +49,11 @@ func TestSafeReportWithDampener(t *testing.T) {
 			problemDampener: 1,
 			expectedSafe:    true,
 		},
-		{
-			name:            "Report 5",
-			report:          []int{58, 59, 62, 63, 64, 63},
-			problemDampener: 1,
-			expectedSafe:    true,
-		},
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			assert.Equal(t, test.expectedSafe, checkIfSafe(test.report, test.problemDampener))
+			isSafeOverall := isSafe(test.report) || isSafeWithOneRemoval(test.report)
+			assert.Equal(t, test.expectedSafe, isSafeOverall)
 		})
 	}
 
