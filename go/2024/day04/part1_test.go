@@ -19,21 +19,21 @@ func TestCountWordOccurrences(t *testing.T) {
 		expectedCount int
 	}{
 		{
-			name:          "1 word",
+			name:          "1 xmas",
 			text:          "XMASA",
-			word:          word,
+			word:          xmas,
 			expectedCount: 1,
 		},
 		{
-			name:          "0 word",
+			name:          "0 xmas",
 			text:          "ABCDEFG",
-			word:          word,
+			word:          xmas,
 			expectedCount: 0,
 		},
 		{
-			name:          "1 word in larger string",
+			name:          "1 xmas in larger string",
 			text:          "MSAXMASMSMXMAS",
-			word:          word,
+			word:          xmas,
 			expectedCount: 2,
 		},
 	}
@@ -45,9 +45,9 @@ func TestCountWordOccurrences(t *testing.T) {
 }
 
 func TestCount(t *testing.T) {
-	assert.Equal(t, 5, countHorizontal(testInputLines))
-	assert.Equal(t, 3, countVertical(testInputLines))
-	assert.Equal(t, 10, countDiagonals(testInputLines))
+	assert.Equal(t, 5, countHorizontal(testInputLines, xmas, samx))
+	assert.Equal(t, 3, countVertical(testInputLines, xmas, samx))
+	assert.Equal(t, 10, countDiagonals(testInputLines, xmas))
 
 	assert.Equal(t, 18, part1(puzzle1Test))
 }

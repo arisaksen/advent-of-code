@@ -11,13 +11,12 @@ import (
 var puzzle1 string
 
 const (
-	word         = "XMAS"
-	reverseWord  = "SAMX"
-	word2        = "MAS"
-	reverseWord2 = "SAM"
+	xmas = "XMAS"
+	samx = "SAMX"
+	mas  = "MAS"
+	sam  = "SAM"
 )
 
-// Check for occurrences of the word in a horizontal or vertical string
 func countWordOccurrences(text string, word string) int {
 	var count int
 	var i int
@@ -38,7 +37,7 @@ func countWordOccurrences(text string, word string) int {
 	return count
 }
 
-func countHorizontal(inputLines []string) int {
+func countHorizontal(inputLines []string, word string, reverseWord string) int {
 	count := 0
 	for _, row := range inputLines {
 		count += countWordOccurrences(row, word)
@@ -47,7 +46,7 @@ func countHorizontal(inputLines []string) int {
 	return count
 }
 
-func countVertical(inputLines []string) int {
+func countVertical(inputLines []string, word string, reverseWord string) int {
 	count := 0
 	numRows := len(inputLines)
 	numCols := len(inputLines[0])
@@ -62,7 +61,7 @@ func countVertical(inputLines []string) int {
 	return count
 }
 
-func countDiagonals(inputLines []string) int {
+func countDiagonals(inputLines []string, word string) int {
 	count := 0
 	numRows := len(inputLines)
 	numCols := len(inputLines[0])
@@ -129,9 +128,9 @@ func countDiagonals(inputLines []string) int {
 func part1(puzzle string) int {
 	inputLines := strings.Split(puzzle, "\n")
 
-	horizontalCount := countHorizontal(inputLines)
-	verticalCount := countVertical(inputLines)
-	diagonalCount := countDiagonals(inputLines)
+	horizontalCount := countHorizontal(inputLines, xmas, samx)
+	verticalCount := countVertical(inputLines, xmas, samx)
+	diagonalCount := countDiagonals(inputLines, xmas)
 
 	return horizontalCount + verticalCount + diagonalCount
 }
