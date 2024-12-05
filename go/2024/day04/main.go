@@ -17,6 +17,7 @@ const (
 	sam  = "SAM"
 )
 
+// sliding window
 func countWordOccurrences(text string, word string) int {
 	var count int
 	var i int
