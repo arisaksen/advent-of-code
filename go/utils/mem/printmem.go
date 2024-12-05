@@ -1,4 +1,4 @@
-package printmem
+package mem
 
 import (
 	"fmt"

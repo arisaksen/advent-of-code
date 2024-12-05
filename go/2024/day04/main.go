@@ -125,6 +125,57 @@ func countDiagonals(inputLines []string, word string) int {
 	return count
 }
 
+func part2(puzzle string) int {
+	inputLines := strings.Split(puzzle, "\n")
+	grid := make([][]rune, len(inputLines))
+	for i, line := range inputLines {
+		grid[i] = []rune(line)
+	}
+
+	count := 0
+	for row := 1; row < len(grid)-1; row++ {
+		for col := 1; col < len(grid[row])-1; col++ {
+			if grid[row][col] != 'A' {
+				continue
+			}
+
+			// M . S
+			// . A .
+			// M . S
+			if grid[row-1][col-1] == 'M' && grid[row-1][col+1] == 'S' &&
+				grid[row+1][col-1] == 'M' && grid[row+1][col+1] == 'S' {
+				count++
+			}
+
+			// S . M
+			// . A .
+			// S . M
+			if grid[row-1][col-1] == 'S' && grid[row-1][col+1] == 'M' &&
+				grid[row+1][col-1] == 'S' && grid[row+1][col+1] == 'M' {
+				count++
+			}
+
+			// M . M
+			// . A .
+			// S . S
+			if grid[row-1][col-1] == 'M' && grid[row-1][col+1] == 'M' &&
+				grid[row+1][col-1] == 'S' && grid[row+1][col+1] == 'S' {
+				count++
+			}
+
+			// S . S
+			// . A .
+			// M . M
+			if grid[row-1][col-1] == 'S' && grid[row-1][col+1] == 'S' &&
+				grid[row+1][col-1] == 'M' && grid[row+1][col+1] == 'M' {
+				count++
+			}
+		}
+	}
+
+	return count
+}
+
 func part1(puzzle string) int {
 	inputLines := strings.Split(puzzle, "\n")
 
@@ -141,8 +192,8 @@ func main() {
 	fmt.Println("Part 1:", part1(puzzle1))
 	fmt.Println(time.Since(start1))
 
-	//start2 := time.Now()
-	//fmt.Println()
-	//fmt.Println("Part 2:", part2(puzzle1))
-	//fmt.Println(time.Since(start2))
+	start2 := time.Now()
+	fmt.Println()
+	fmt.Println("Part 2:", part2(puzzle1))
+	fmt.Println(time.Since(start2))
 }
