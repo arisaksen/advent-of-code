@@ -3,7 +3,9 @@ package main
 import (
 	_ "embed"
 	"fmt"
+	"github.com/lmittmann/tint"
 	"log/slog"
+	"os"
 	"slices"
 	"sort"
 	"strconv"
@@ -151,15 +153,15 @@ func main() {
 	fmt.Println("Part 1:", part1(puzzle1))
 	fmt.Println(time.Since(start1))
 
-	//slog.SetDefault(
-	//	slog.New(
-	//		tint.NewHandler(os.Stdout, &tint.Options{
-	//			AddSource:  true,
-	//			Level:      slog.LevelDebug,
-	//			TimeFormat: time.Kitchen,
-	//		}),
-	//	),
-	//)
+	slog.SetDefault(
+		slog.New(
+			tint.NewHandler(os.Stdout, &tint.Options{
+				AddSource:  true,
+				Level:      slog.LevelDebug,
+				TimeFormat: time.Kitchen,
+			}),
+		),
+	)
 
 	start2 := time.Now()
 	fmt.Println()
