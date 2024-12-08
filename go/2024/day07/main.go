@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -66,7 +67,7 @@ func checkCombinations(stringNumbers []string, combinations string) int {
 		} else if operator == '*' {
 			total *= number
 		} else if operator == '|' {
-			total, _ = strconv.Atoi(fmt.Sprintf("%d%d", total, number))
+			total = total*int(math.Pow10(len(strconv.Itoa(number)))) + number
 		} else {
 			log.Fatal("unsupported operator")
 		}
