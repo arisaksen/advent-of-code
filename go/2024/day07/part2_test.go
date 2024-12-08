@@ -2,37 +2,18 @@ package main
 
 import (
 	_ "embed"
-	"fmt"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
 )
 
-//go:embed puzzle1_test.txt
-var puzzle1Test string
-
-func TestGenerateCombinations(t *testing.T) {
-	sings := []string{"a", "b", "|"}
-
-	combinations := new([]string)
-	generateCombinations(sings, len(sings), "", combinations)
-
-	assert.Equal(t, 27, len(*combinations))
-	for _, combination := range *combinations {
-		fmt.Println(combination)
-	}
+func TestCheckCombinationsPart2(t *testing.T) {
+	assert.Equal(t, 12, checkCombinations([]string{"1", "1", "1"}, "|+"))
+	assert.Equal(t, 41, checkCombinations([]string{"2", "2", "1"}, "+|"))
 }
 
-func TestCheckCombinations(t *testing.T) {
-	assert.Equal(t, 3, checkCombinations([]string{"1", "1", "1"}, "++"))
-	assert.Equal(t, 1, checkCombinations([]string{"1", "1", "1"}, "**"))
-	assert.Equal(t, 27, checkCombinations([]string{"3", "3", "3"}, "**"))
-	assert.Equal(t, 18, checkCombinations([]string{"3", "3", "3"}, "+*"))
-	assert.Equal(t, 4, checkCombinations([]string{"1", "1", "1", "1"}, "+++"))
-}
-
-func TestCheckOperator(t *testing.T) {
-	sings := []string{"+", "*"}
+func TestCheckOperatorPart2(t *testing.T) {
+	sings := []string{"+", "*", "|"}
 
 	tests := []struct {
 		name           string
@@ -67,7 +48,7 @@ func TestCheckOperator(t *testing.T) {
 		{
 			name:           "test 5",
 			line:           "7290: 6 8 6 15",
-			expectedAnswer: 0,
+			expectedAnswer: 7290,
 		},
 	}
 	for _, test := range tests {
@@ -83,15 +64,37 @@ func TestCheckOperator(t *testing.T) {
 
 }
 
-func TestPart1(t *testing.T) {
-	actual := part1(puzzle1Test)
+func TestPart2(t *testing.T) {
+	actual := part2(puzzle1Test)
 
-	assert.Equal(t, 3749, actual)
+	assert.Equal(t, 11387, actual)
 }
 
-func BenchmarkTest(b *testing.B) {
+func BenchmarkGenerateCombinations(b *testing.B) {
+	operatorCombinations := new([]string)
 	for i := 0; i < b.N; i++ {
-		_ = part1(puzzle1Test)
+		generateCombinations(operators2, 5, "", operatorCombinations)
+	}
+	b.ReportAllocs()
+}
+
+func BenchmarkCheckOperator(b *testing.B) {
+	sings := []string{"+", "*", "|"}
+	line := "7290: 6 8 6 15"
+
+	operatorsLen := len(strings.Fields(line)) - 2
+	operatorCombinations := new([]string)
+	generateCombinations(sings, operatorsLen, "", operatorCombinations)
+
+	for i := 0; i < b.N; i++ {
+		_ = checkOperator(line, *operatorCombinations)
+	}
+	b.ReportAllocs()
+}
+
+func BenchmarkPart2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = part2(puzzle1)
 	}
 	b.ReportAllocs()
 }
