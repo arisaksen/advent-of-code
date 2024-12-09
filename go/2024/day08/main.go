@@ -38,17 +38,15 @@ func (a position) getAntiNode(b position) position {
 
 func createPositionMap(puzzle string) (map[rune][]position, int, int) {
 	antennaMap := make(map[rune][]position)
-	var inputLines []string
-	for _, line := range strings.Split(strings.TrimSuffix(puzzle, "\n"), "\n") {
-		inputLines = append(inputLines, line)
-	}
 
-	sizeX := len(inputLines[0])
-	sizeY := len(inputLines)
-	for i, inputLine := range inputLines {
+	inputLines := strings.Split(puzzle, "\n")
+	sizeX := len(inputLines[0]) - 1
+	sizeY := len(inputLines) - 1
+
+	for x, inputLine := range inputLines {
 		for y, char := range inputLine {
 			if char != '.' {
-				antennaMap[char] = append(antennaMap[char], position{i, y})
+				antennaMap[char] = append(antennaMap[char], position{x, y})
 			}
 		}
 	}
@@ -96,15 +94,6 @@ func part1(puzzle string) int {
 	}
 
 	return len(allAntiNodesCombined)
-}
-
-func part2(puzzle string) int {
-	var inputLines []string
-	for _, line := range strings.Split(strings.TrimSuffix(puzzle, "\n"), "\n") {
-		inputLines = append(inputLines, line)
-	}
-
-	return 1
 }
 
 func main() {

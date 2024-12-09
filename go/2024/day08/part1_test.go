@@ -101,8 +101,17 @@ func TestPart1(t *testing.T) {
 }
 
 func BenchmarkTest(b *testing.B) {
+	slog.SetDefault(
+		slog.New(
+			tint.NewHandler(os.Stdout, &tint.Options{
+				AddSource:  true,
+				Level:      slog.LevelError,
+				TimeFormat: time.Kitchen,
+			}),
+		),
+	)
 	for i := 0; i < b.N; i++ {
-		_ = part1(puzzle1Test)
+		part1(puzzle1Test)
 	}
 	b.ReportAllocs()
 }

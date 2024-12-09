@@ -16,30 +16,28 @@ type position struct {
 }
 
 func getAntiNodes(input string, addAntiNodes func(ax, ay int, dx, dy int, maxX, maxY int, antiNodes set.Set[position])) int {
-	var lines = strings.Split(input, "\n")
-	var maxX = len(lines[0]) - 1
-	var maxY = len(lines) - 1
+	antiNodes := set.NewSet[position]()
 
-	var antenna [256][]position
-	var antiNodes = set.NewSet[position]()
-	for i, line := range lines {
-		for j, c := range line {
-			if c == '.' {
-				continue
+	inputLines := strings.Split(input, "\n")
+	maxX := len(inputLines[0]) - 1
+	maxY := len(inputLines) - 1
+
+	antenna := make(map[rune][]position)
+	for y, line := range inputLines {
+		for x, char := range line {
+			if char != '.' {
+				antenna[char] = append(antenna[char], position{x, y})
 			}
-			antenna[uint8(c)] = append(antenna[uint8(c)], position{x: j, y: i})
 		}
 	}
 
 	for _, s := range antenna {
-		if len(s) > 0 {
-			for i, a1 := range s[:len(s)-1] {
-				for _, a2 := range s[i+1:] {
-					dx := a2.x - a1.x
-					dy := a2.y - a1.y
-					addAntiNodes(a2.x, a2.y, dx, dy, maxX, maxY, antiNodes)
-					addAntiNodes(a1.x, a1.y, -dx, -dy, maxX, maxY, antiNodes)
-				}
+		for i, a1 := range s[:len(s)-1] {
+			for _, a2 := range s[i+1:] {
+				dx := a2.x - a1.x
+				dy := a2.y - a1.y
+				addAntiNodes(a2.x, a2.y, dx, dy, maxX, maxY, antiNodes)
+				addAntiNodes(a1.x, a1.y, -dx, -dy, maxX, maxY, antiNodes)
 			}
 		}
 	}
@@ -48,7 +46,7 @@ func getAntiNodes(input string, addAntiNodes func(ax, ay int, dx, dy int, maxX, 
 }
 
 func part1(input string) int {
-	var addAntiNodes = func(ax, ay int, dx, dy int, maxX, maxY int, antiNodes set.Set[position]) {
+	addAntiNodes := func(ax, ay int, dx, dy int, maxX, maxY int, antiNodes set.Set[position]) {
 		ax += dx
 		ay += dy
 		if ax >= 0 && ax <= maxX && ay >= 0 && ay <= maxY {
@@ -59,9 +57,9 @@ func part1(input string) int {
 }
 
 func part2(input string) int {
-	var addAntiNodes = func(ax, ay int, dx, dy int, maxX, maxY int, antinodes set.Set[position]) {
+	addAntiNodes := func(ax, ay int, dx, dy int, maxX, maxY int, antiNodes set.Set[position]) {
 		for ax >= 0 && ax <= maxX && ay >= 0 && ay <= maxY {
-			antinodes.Add(position{x: ax, y: ay})
+			antiNodes.Add(position{x: ax, y: ay})
 			ax += dx
 			ay += dy
 		}
@@ -70,8 +68,6 @@ func part2(input string) int {
 }
 
 func main() {
-	fmt.Println("--2024 day 08 solution--")
-	//var inputDay = inputTest
 	start := time.Now()
 	fmt.Println("part1: ", part1(puzzle1))
 	fmt.Println(time.Since(start))
