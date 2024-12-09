@@ -15,10 +15,8 @@ type position struct {
 	x, y int
 }
 
-func getAntiNodes(input string, addAntiNodes func(ax, ay int, dx, dy int, maxX, maxY int, antiNodes set.Set[position])) int {
-	antiNodes := set.NewSet[position]()
-
-	inputLines := strings.Split(input, "\n")
+func createPositionMap(puzzle string) (map[rune][]position, int, int) {
+	inputLines := strings.Split(puzzle, "\n")
 	maxX := len(inputLines[0]) - 1
 	maxY := len(inputLines) - 1
 
@@ -31,7 +29,14 @@ func getAntiNodes(input string, addAntiNodes func(ax, ay int, dx, dy int, maxX, 
 		}
 	}
 
-	for _, s := range antenna {
+	return antenna, maxX, maxY
+}
+
+func getAntiNodes(input string, addAntiNodes func(ax, ay int, dx, dy int, maxX, maxY int, antiNodes set.Set[position])) int {
+	antennaMap, maxX, maxY := createPositionMap(input)
+
+	antiNodes := set.NewSet[position]()
+	for _, s := range antennaMap {
 		for i, a1 := range s[:len(s)-1] {
 			for _, a2 := range s[i+1:] {
 				dx := a2.x - a1.x
