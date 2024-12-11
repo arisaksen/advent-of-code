@@ -43,8 +43,8 @@ func createPositionMap(puzzle string) (map[rune][]position, int, int) {
 	sizeX := len(inputLines[0]) - 1
 	sizeY := len(inputLines) - 1
 
-	for x, inputLine := range inputLines {
-		for y, char := range inputLine {
+	for y, inputLine := range inputLines {
+		for x, char := range inputLine {
 			if char != '.' {
 				antennaMap[char] = append(antennaMap[char], position{x, y})
 			}

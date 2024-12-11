@@ -2,6 +2,8 @@ package stack
 
 import "errors"
 
+// See also https://www.codingexplorations.com/blog/exploring-the-power-of-the-container-package-in-go
+
 type Stack[T any] []T
 
 func NewStack[T any]() Stack[T] {
