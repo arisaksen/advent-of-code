@@ -12,8 +12,8 @@ type DrawSystem struct {
 }
 
 func drawBox(screen *ebiten.Image, transform *TransformComponent, boxColor color.Color) {
-	left := float32(transform.X - transform.Size/2)
-	top := float32(transform.Y - transform.Size/2)
+	left := float32(transform.X)
+	top := float32(transform.Y)
 	widht := float32(transform.Size)
 	height := float32(transform.Size)
 
