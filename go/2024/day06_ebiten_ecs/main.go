@@ -91,5 +91,6 @@ func main() {
 	}
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("render single image")
+	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 	log.Fatal(ebiten.RunGame(&game))
 }

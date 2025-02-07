@@ -12,28 +12,11 @@ import (
 	"strings"
 )
 
-var (
+//go:embed puzzle1.txt
+var Puzzle1 string // 140 * 140 pixels
 
-	//go:embed puzzle1.txt
-	puzzle1     string // 140 * 140 pixels
-	puzzleTest1 = `AAAA
-BBCD
-BBCC
-EEEC`
-	puzzleTest2 = `RRRRIICCFF
-RRRRIICCCF
-VVRRRCCFFF
-VVRCCCJFFF
-VVVVCJJCFE
-VVIVCCJJEE
-VVIIICJJEE
-MIIIIIJJEE
-MIIISIJEEE
-MMMISSJEEE`
-
-	//go:embed assets
-	Assets embed.FS
-)
+//go:embed assets
+var Assets embed.FS
 
 const (
 	screenWidth  = 1200
@@ -64,13 +47,16 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 }
 
 func main() {
-	//input := puzzleTest1
-	input := puzzleTest2
-	//input := puzzle1
+	//input := PuzzleTest1
+	//input := PuzzleTest2
+	input := PuzzleTest3
+	//input := PuzzleTest4
+	//input := PuzzleTest5
+	//input := Puzzle1
 
 	inputLines := strings.Split(input, "\n")
 	var (
-		mapBoarderTile     = 1
+		mapBoarderTile     = 2
 		_                  = len(inputLines) + 2*mapBoarderTile
 		tileCountForHeight = len(inputLines) + 2*mapBoarderTile
 		tileSize           = screenWidth / tileCountForHeight
@@ -116,7 +102,8 @@ func main() {
 		drawSystem: &ecs.DrawSystem{Registry: &registry},
 	}
 	ebiten.SetWindowSize(screenWidth, screenHeight)
-	ebiten.SetWindowTitle("render single image")
+	ebiten.SetWindowTitle("Advent of Code Day12")
+	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 	log.Fatal(ebiten.RunGame(&game))
 }
 
