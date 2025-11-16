@@ -30,3 +30,7 @@ go.work.sum
 
 # ignore all text files
 *.txt
+
+# Cpp
+build
+Testing

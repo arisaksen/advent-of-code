@@ -1,0 +1,50 @@
+# Learning Cpp with advent of code 2023
+
+This is for learning cpp and learning is done with Simon Toth when stuck.
+Cmake is done without modules. Because a project I am currently working on has non started using cpp modules yet.
+
+# Cmake and Ninja
+
+CMake = “Recipe creator” → figures out what needs to be cooked and generates instructions.
+Ninja = “Chef” → actually follows the recipe and cooks the food efficiently.
+
+# How to run
+
+```sh
+cd day01
+cmake -S . -B build             # Configure
+cmake --build build --parallel  # Build
+cmake --install build           # Install (optional) - system-wide installs
+cmake --install build --prefix ./install # Install to a local (non-root) directory
+```
+
+# Modern C++ Solutions for Advent of Code 2021
+
+This repository contains solution for the Advent of Code 2021 and serve as base for articles with explanations of how
+these solutions work:
+
+- [Day 1 Explanation Article](https://itnext.io/modern-c-in-advent-of-code-day1-18f7697d4f6b)
+- [Day 2 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day2-ca0af5bf0182)
+- [Day 3 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day3-4a105922b5d0)
+- [Day 4 Explanation Article](https://itnext.io/modern-c-in-advent-of-code-day4-14bee3fd1609)
+- [Day 5 Explanation Article](https://itnext.io/modern-c-in-advent-of-code-day5-4777e4037869)
+- [Day 6 Explanation Article](https://itnext.io/modern-c-in-advent-of-code-day6-aca753568b8c)
+- [Day 7 Explanation Article](https://itnext.io/modern-c-in-advent-of-code-day7-39b74e4375a5)
+- [Day 8 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day8-3b5d3e6c24b6)
+- [Day 9 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day9-1ad4e7890032)
+- [Day 10 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day10-82fbe672b47)
+- [Day 11 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day11-fe5a9eb6f3ad)
+- [Day 12 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day12-1de190deb2e4)
+- [Day 13 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day13-4ae500de12b0)
+- [Day 14 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day14-6f8347ec68d5)
+- [Day 15 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day15-74c2023711b0)
+- [Day 16 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day16-6de15011455b)
+- [Day 17 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day17-16333c720226)
+- [Day 18 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day18-54942485460b)
+- [Day 19 Explanation Article](https://medium.com/@happy.cerberus/ff9525afb2ee)
+- [Day 20 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day20-be8b657e7f86)
+- [Day 21 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day21-237edcc5034e)
+- [Day 22 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day22-ff85b2540d9b)
+- [Day 23 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day23-cb9a0cc30ee3)
+- [Day 24 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day24-4a7a11000778)
+- [Day 25 Explanation Article](https://medium.com/@happy.cerberus/modern-c-in-advent-of-code-day25-29630dd6b5d9)
